@@ -1,6 +1,6 @@
 function searchCards() {
     var query = document.getElementById('searchQuery').value;
-    var apiUrl = "https://api.trello.com/1/search?key=62ce53af50195827422a471155d39dbd&token=ATTA2881e830c57b989c2539e76e1accd34af3e1777c1f85c5767eb162c43f623abe63880628&modelTypes=cards&card_members=true&card_attachments=true&query=" + query;
+    var apiUrl = "https://api.trello.com/1/search?key=62ce53af50195827422a471155d39dbd&token=ATTA2881e830c57b989c2539e76e1accd34af3e1777c1f85c5767eb162c43f623abe63880628&modelTypes=cards&card_members=true&card_attachments=true&cards_limit=1000&query=" + query;
 
     fetch(apiUrl)
         .then(response => response.json())
