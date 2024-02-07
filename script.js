@@ -16,14 +16,28 @@ function displayResults(cards, query) { // Accept query as a parameter
     resultCount.innerHTML = cards.length + " results found for \"" + query + "\"";
 
     // Clear previous results
-    resultsTable.innerHTML = '<tr><th>Request</th><th>Description</th><th>Attachment</th><th style="width:100px">Analyst</th><th style="width:100px">Date</th></tr>';
+    resultsTable.innerHTML = '<tr><th style="width:300px">Request</th><th>Description</th><th style="width:300px">Attachment</th><th style="width:100px">Analyst</th><th style="width:100px">Date</th></tr>';
 
     // Add new results
     cards.forEach((card, i) => {
         var row = resultsTable.insertRow(i + 1);
         row.insertCell(0).innerHTML = card.name;
         row.insertCell(1).innerHTML = card.desc;
-        row.insertCell(2).innerHTML = card.attachments[0]?.url ?? '';
+
+        var attachmentCell = row.insertCell(2);
+        if (card.attachments && card.attachments[0] && card.attachments[0].url) {
+            var url = card.attachments[0].url;
+            var domain = (new URL(url)).hostname.replace('www.', ''); // Extract domain name
+
+            var a = document.createElement('a');
+            a.href = url;
+            a.textContent = domain; // Use domain as link text
+            a.target = "_blank"; // Opens in a new tab
+            attachmentCell.appendChild(a);
+        } else {
+            attachmentCell.innerHTML = 'No Attachment';
+        }
+
         row.insertCell(3).innerHTML = card.members[0]?.fullName.split(' ')[0] ?? '';
         row.insertCell(4).innerHTML = card.start ? card.start.split('T')[0] : '';
     });
