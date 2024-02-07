@@ -16,7 +16,7 @@ function displayResults(cards, query) { // Accept query as a parameter
     resultCount.innerHTML = cards.length + " results found for \"" + query + "\"";
 
     // Clear previous results
-    resultsTable.innerHTML = '<tr><th>Name</th><th>Description</th><th>Attachment URL</th><th>Member First Name</th><th>Start Date</th></tr>';
+    resultsTable.innerHTML = '<tr><th>Request</th><th>Description</th><th>Attachment</th><th style="width:100px">Analyst</th><th style="width:100px">Date</th></tr>';
 
     // Add new results
     cards.forEach((card, i) => {
