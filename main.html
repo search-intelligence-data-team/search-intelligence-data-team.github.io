@@ -3,11 +3,20 @@
 <head>
     <title>Trello Search Tool</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        window.onload = function() {
+            if (document.cookie.split(';').some((item) => item.trim().startsWith('loggedIn='))) {
+            } else {
+                window.location.href = 'index.html';
+            }
+        };
+    </script>
 </head>
 <body>
     <h1>Data Request Search-O-Matic</h1>
     <input type="text" id="searchQuery" placeholder="Enter search query">
     <button onclick="searchCards()">Search</button>
+    <button onclick="logout()">Logout</button>
     <p id="resultCount"></p>
     <table id="resultsTable">
         <tr>
