@@ -11,7 +11,7 @@ function searchCards() {
         .catch(error => console.error('Error:', error));
 }
 
-function displayResults(cards, query) { // Accept query as a parameter
+function displayResults(cards, query) { 
     var resultsTable = document.getElementById('resultsTable');
     var resultCount = document.getElementById('resultCount');
     resultCount.innerHTML = cards.length + " results found for \"" + query + "\"";
@@ -19,7 +19,14 @@ function displayResults(cards, query) { // Accept query as a parameter
     // Clear previous results
     resultsTable.innerHTML = '<tr><th style="width:300px">Request</th><th>Description</th><th style="width:300px">Attachment</th><th style="width:100px">Analyst</th><th style="width:100px">Date</th></tr>';
 
-    // Add new results
+    // Sort cards
+    cards.sort((a, b) => {
+        var dateA = a.start ? new Date(a.start) : new Date(0); // Use a default date if not present
+        var dateB = b.start ? new Date(b.start) : new Date(0); // Use a default date if not present
+        return dateB - dateA; // Sort in descending order
+    });
+
+    // Add results
     cards.forEach((card, i) => {
         var row = resultsTable.insertRow(i + 1);
         row.insertCell(0).innerHTML = card.name;
@@ -28,12 +35,12 @@ function displayResults(cards, query) { // Accept query as a parameter
         var attachmentCell = row.insertCell(2);
         if (card.attachments && card.attachments[0] && card.attachments[0].url) {
             var url = card.attachments[0].url;
-            var domain = (new URL(url)).hostname.replace('www.', ''); // Extract domain name
+            var domain = (new URL(url)).hostname.replace('www.', ''); 
 
             var a = document.createElement('a');
             a.href = url;
-            a.textContent = domain; // Use domain as link text
-            a.target = "_blank"; // Opens in a new tab
+            a.textContent = domain;
+            a.target = "_blank";
             attachmentCell.appendChild(a);
         } else {
             attachmentCell.innerHTML = 'No Attachment';
@@ -43,3 +50,4 @@ function displayResults(cards, query) { // Accept query as a parameter
         row.insertCell(4).innerHTML = card.start ? card.start.split('T')[0] : '';
     });
 }
+
