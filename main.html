@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trello Search Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Data Request Search-O-Matic</h1>
+    <input type="text" id="searchQuery" placeholder="Enter search query">
+    <button onclick="searchCards()">Search</button>
+    <p id="resultCount"></p>
+    <table id="resultsTable">
+        <tr>
+            <ths tyle="width:300px">Request</th>
+            <th>Description</th>
+            <th style="width:300px">Attachment</th>
+            <th style="width:100px">Analyst</th>
+            <th style="width:100px">Date</th>
+        </tr>
+        <!-- Results will be inserted here -->
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
